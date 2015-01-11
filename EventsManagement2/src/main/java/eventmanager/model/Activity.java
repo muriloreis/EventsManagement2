@@ -29,7 +29,6 @@ public class Activity implements Serializable {
     @Column()
     private String nome;
     private String descricao;
-    private int evento;
 
     /**
      * @return the idatividade
@@ -73,17 +72,17 @@ public class Activity implements Serializable {
         this.descricao = descricao;
     }
 
-    /**
-     * @return the evento
-     */
-    public int getEvento() {
-        return evento;
+    @Override
+    public String toString() {
+        return nome;
     }
 
-    /**
-     * @param evento the evento to set
-     */
-    public void setEvento(int evento) {
-        this.evento = evento;
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    
+    
 }

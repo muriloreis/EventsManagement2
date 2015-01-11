@@ -20,7 +20,6 @@
                     <th width="">ID</th>
                     <th width="">Nome</th>
                     <th width="">Descricao</th>
-                    <th width="">Evento</th>
                     <th width="">Operations</th>
                 </tr>
             </thead>
@@ -30,7 +29,6 @@
                         <td>${activity.idatividade}</td>
                         <td>${activity.nome}</td>
                         <td>${activity.descricao}</td>
-                        <td>${activity.evento}</td>
                         <td>
                             <a href="${pageContext.request.contextPath}/Activity/editForm/${activity.idatividade}">Edit</a> | 
                             <a href="${pageContext.request.contextPath}/Activity/delete/${activity.idatividade}">Delete</a>

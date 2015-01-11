@@ -22,6 +22,7 @@
                     <th width="">Nome</th>
                     <th width="">Descricao</th>
                     <th width="">Criador</th>
+                    <th width="">Atividades</th>
                     <th width="">Operations</th>
                 </tr>
             </thead>
@@ -32,6 +33,9 @@
                         <td>${event.nome}</td>
                         <td>${event.descricao}</td>
                         <td>${event.criador}</td>
+                        <td>
+                            ${event.atividades}
+                        </td>
                         <td>
                             <a href="${pageContext.request.contextPath}/Event/editForm/${event.id}">Edit</a> | 
                             <a href="${pageContext.request.contextPath}/Event/delete/${event.id}">Delete</a>

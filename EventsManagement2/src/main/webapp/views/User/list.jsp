@@ -20,9 +20,9 @@
                 <tr>
                     <th width="">ID</th>
                     <th width="">First name</th>
-                    <th width="">Last name</th>
                     <th width="">Username</th>
                     <th width="">Password</th>
+                    <th width="">Type</th>
                     <th width="">Operations</th>
                 </tr>
             </thead>
@@ -33,6 +33,7 @@
                         <td>${user.nome}</td>
                         <td>${user.username}</td>
                         <td>${user.password}</td>
+                        <td>${user.type}</td>
                         <td>
                             <a href="${pageContext.request.contextPath}/User/editForm/${user.iduser}">Edit</a> | 
                             <a href="${pageContext.request.contextPath}/User/delete/${user.iduser}">Delete</a>

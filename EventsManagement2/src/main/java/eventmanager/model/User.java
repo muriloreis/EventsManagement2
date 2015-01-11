@@ -6,11 +6,13 @@
 package eventmanager.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,6 +34,7 @@ public class User implements Serializable {
     private String nome;
     private String password;
     private String cpf;
+    private UserType type;
 
     /**
      * @return the iduser
@@ -102,4 +105,29 @@ public class User implements Serializable {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    /**
+     * @return the type
+     */
+    public UserType getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(UserType type) {
+        this.type = type;
+    }
+    
+    @Override
+    public String toString() {
+        return nome;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

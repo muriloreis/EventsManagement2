@@ -24,7 +24,14 @@
                 <form:input path="username"/> <br/>
             <label>Password:</label>
                 <form:password path="password"/> <br/>
-                <button type="submit">${button}</button>
+            <label for="select-perfil">Perfil</label>    
+            <form:select id="select-perfil" path="type">                
+                <form:option value="0">Admin</form:option>
+                <form:option value="1">Empresa</form:option>
+                <form:option value="2">Participante</form:option>
+            </form:select>
+            <br/>
+           <button type="submit">${button}</button>
         </form:form>
         <a href="${pageContext.request.contextPath}">Home Page</a>
     </body>

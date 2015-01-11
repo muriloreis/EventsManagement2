@@ -22,8 +22,12 @@
                 <form:input path="nome"/> <br/>
             <label>Descricao:</label> 
                 <form:input path="descricao"/> <br/>
-                <button type="submit"> ${button} </button>
-                <a href="${pageContext.request.contextPath}">Home Page</a>
+           <label>Atividades</label>  
+           <form:checkboxes path="atividade" items="${atividades}"/>
+           <br/>
+           <button type="submit"> ${button} </button>
+           <br/>
+           <a href="${pageContext.request.contextPath}">Home Page</a>
         </form:form>
     </body>
 </html>

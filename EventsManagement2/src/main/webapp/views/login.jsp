@@ -1,8 +1,9 @@
 <%-- 
-    Document   : add
-    Created on : Dec 8, 2014, 6:27:01 PM
+    Document   : login
+    Created on : Jan 11, 2015, 2:51:04 PM
     Author     : Murilo
 --%>
+
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,17 +14,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Adicionar Atividade</h1>
+        <h1>Login</h1>
         <div class="message">
-            ${message}
+            <h3 style="color: red">${message}</h3>
         </div>
-        <form:form commandName="activity" action="${pageContext.request.contextPath}/Activity/${action}">
-            <label>Nome:</label> 
-                <form:input path="nome"/> <br/>
-            <label>Descricao:</label> 
-                <form:input path="descricao"/> <br/>
-             <button type="submit">${button}</button>
+        <form:form commandName="login" action="${pageContext.request.contextPath}/login">
+            <label for="username">Username:</label> 
+                <form:input id="username" path="username"/> <br/>
+            <label for="password">Password:</label>
+                <form:password id="password" path="password"/> <br/>
+                <button type="submit">Entrar</button>
         </form:form>
         <a href="${pageContext.request.contextPath}">Home Page</a>
     </body>
 </html>
+
