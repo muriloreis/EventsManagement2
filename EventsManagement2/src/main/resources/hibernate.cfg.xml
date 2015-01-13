@@ -13,5 +13,7 @@
     <mapping class="eventmanager.model.User"/>
     <mapping class="eventmanager.model.Activity"/>
     <mapping class="eventmanager.model.Event"/>
+    <mapping class="eventmanager.model.Pagamento"/>
+
   </session-factory>
 </hibernate-configuration>

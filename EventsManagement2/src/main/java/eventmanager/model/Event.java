@@ -36,6 +36,7 @@ public class Event implements Serializable {
     @Column()
     private String nome;
     private String descricao;
+    private double valorInscricao;
     
     @ManyToOne
     private User criador;
@@ -152,6 +153,20 @@ public class Event implements Serializable {
      */
     public void setAtividade(String[] atividade) {
         this.atividade = atividade;
+    }
+
+    /**
+     * @return the valorInscricao
+     */
+    public double getValorInscricao() {
+        return valorInscricao;
+    }
+
+    /**
+     * @param valorInscricao the valorInscricao to set
+     */
+    public void setValorInscricao(double valorInscricao) {
+        this.valorInscricao = valorInscricao;
     }
     
 }

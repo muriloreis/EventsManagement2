@@ -164,8 +164,8 @@ public class EventController {
         ModelAndView modelAndView = new ModelAndView("menu");           
         Event event = eventDAO.getEventById(id);
         User user = (User)session.getAttribute("usuario_logado");
-        //new UserDAO().edit(user);
-        System.out.println(user.getIduser());
+        user.addInscricao(event);
+        new UserDAO().edit(user);
         event.addInscritos(user);
         eventDAO.edit(event);
         

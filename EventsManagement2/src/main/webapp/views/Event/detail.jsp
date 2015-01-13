@@ -42,7 +42,7 @@
                     </tr>
                 </c:forEach>
             </tbody>
-            <h3><a href="${pageContext.request.contextPath}/Event/inscricao/${id}">Inscreva-se</a></h3>
+            <h3><a href="${pageContext.request.contextPath}/Pagamento/dados/${id}">Inscreva-se</a></h3>
         </table>
     </body>
 </html>
