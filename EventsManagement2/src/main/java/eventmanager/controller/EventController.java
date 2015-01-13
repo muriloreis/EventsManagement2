@@ -8,11 +8,13 @@ package eventmanager.controller;
 import eventmanager.dao.ActivityDAO;
 import eventmanager.dao.EventDAO;
 import eventmanager.model.Activity;
+import eventmanager.model.Busca;
 import eventmanager.model.Event;
 import eventmanager.model.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -109,6 +111,24 @@ public class EventController {
         List events = eventDAO.getAllEvents();
         modelAndView.addObject("events", events);
         modelAndView.addObject("message", "Evento deletado com sucesso");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/Event/busca")
+    public ModelAndView busca(@ModelAttribute Busca busca,HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("menu");
+        User user = (User)session.getAttribute("usuario_logado");
+        //Setando Parametros da Pagina
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("events", eventDAO.getEventsByString(busca.getNome()));
+        modelAndView.addObject("nomeEvento", new Busca());
+        
+        //Setando Interface
+        modelAndView.addObject("message","Resultado da busca: "+busca.getNome());
+        modelAndView.addObject("link1","eventos");
+        modelAndView.addObject("link1Label","Meus Eventos");
+        modelAndView.addObject("link2","inscricoes");
+        modelAndView.addObject("link2Label","Minhas Inscricoes");
         return modelAndView;
     }
 

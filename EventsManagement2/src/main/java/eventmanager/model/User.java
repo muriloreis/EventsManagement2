@@ -6,12 +6,16 @@
 package eventmanager.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,6 +39,13 @@ public class User implements Serializable {
     private String password;
     private String cpf;
     private UserType type;
+    
+    
+    @OneToMany(mappedBy = "criador",targetEntity = Event.class,fetch = FetchType.EAGER)
+    private List<Event> meusEventos = new ArrayList<>();
+    
+    @ManyToMany(mappedBy = "inscritos",targetEntity = Event.class,fetch = FetchType.EAGER)
+    private List<Event> minhasInscricoes;
 
     /**
      * @return the iduser
@@ -128,6 +139,34 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the meusEventos
+     */
+    public List<Event> getMeusEventos() {
+        return meusEventos;
+    }
+
+    /**
+     * @param meusEventos the meusEventos to set
+     */
+    public void setMeusEventos(List<Event> meusEventos) {
+        this.meusEventos = meusEventos;
+    }
+
+    /**
+     * @return the minhasInscricoes
+     */
+    public List<Event> getMinhasInscricoes() {
+        return minhasInscricoes;
+    }
+
+    /**
+     * @param minhasInscricoes the minhasInscricoes to set
+     */
+    public void setMinhasInscricoes(List<Event> minhasInscricoes) {
+        this.minhasInscricoes = minhasInscricoes;
     }
     
 }

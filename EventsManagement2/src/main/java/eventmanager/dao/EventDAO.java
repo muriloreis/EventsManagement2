@@ -54,6 +54,17 @@ public class EventDAO {
         return (Event) list.get(0);
     }
     
+    public List getEventsByString(String str){
+                Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        List list = session.createQuery("from Event where nome like :str")
+                .setParameter("str", str)
+                .list();
+         transaction.commit();
+         session.close();
+        return list;
+    }
+    
     public List getAllEvents(){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();

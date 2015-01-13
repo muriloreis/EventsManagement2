@@ -19,7 +19,7 @@ public class AuthenticationIntercepter extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         if(request.getSession().getAttribute("usuario_logado") == null){
             String uri = request.getRequestURI();
-            if(uri.endsWith("/login") || uri.endsWith("/loginForm") || uri.endsWith("/EventsManagement2")){
+            if(uri.endsWith("/login") || uri.endsWith("/loginForm")){
                 return true;
             }
             response.sendRedirect("/EventsManagement2/loginForm");

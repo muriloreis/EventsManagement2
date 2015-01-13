@@ -6,8 +6,10 @@
 package eventmanager.controller;
 
 import eventmanager.dao.UserDAO;
+import eventmanager.model.Busca;
 import eventmanager.model.User;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,4 +83,58 @@ public class UserController {
         modelAndView.addObject("message", "usuario deletado com sucesso");
         return modelAndView;
     }
+    
+    @RequestMapping(value = "/User/eventos")
+    public ModelAndView eventos(HttpSession session){
+        User user = (User)session.getAttribute("usuario_logado");
+        ModelAndView modelAndView = new ModelAndView("menu");
+        //Setando Parametros da Pagina
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("events", user.getMeusEventos());
+        modelAndView.addObject("nomeEvento", new Busca());
+        
+        //Setando Interface
+        modelAndView.addObject("message", "Meus Eventos");
+        modelAndView.addObject("link1","menu");
+        modelAndView.addObject("link1Label","Menu");
+        modelAndView.addObject("link2","inscricoes");
+        modelAndView.addObject("link2Label","Minhas Inscricoes");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/User/menu")
+    public ModelAndView menu(HttpSession session){
+        User user = (User)session.getAttribute("usuario_logado");
+        ModelAndView modelAndView = new ModelAndView("menu");
+        //Setando Parametros da Pagina
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("events", user.getMeusEventos());
+        modelAndView.addObject("nomeEvento", new Busca());
+        
+        //Setando Interface
+        modelAndView.addObject("link1","eventos");
+        modelAndView.addObject("link1Label","Meus Eventos");
+        modelAndView.addObject("link2","inscricoes");
+        modelAndView.addObject("link2Label","Minhas Inscricoes");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/User/inscricoes")
+    public ModelAndView inscricoes(HttpSession session){
+        User user = (User)session.getAttribute("usuario_logado");
+        ModelAndView modelAndView = new ModelAndView("menu");
+        //Setando Parametros da Pagina
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("events", user.getMeusEventos());
+        modelAndView.addObject("nomeEvento", new Busca());
+        
+        //Setando Interface
+        modelAndView.addObject("message", "Minhas Inscricoes");
+        modelAndView.addObject("link1","menu");
+        modelAndView.addObject("link1Label","Menu");
+        modelAndView.addObject("link2","eventos");
+        modelAndView.addObject("link2Label","Meus Eventos");
+        return modelAndView;
+    }
+    
 }

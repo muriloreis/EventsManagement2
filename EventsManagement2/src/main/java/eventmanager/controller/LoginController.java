@@ -5,7 +5,9 @@
  */
 package eventmanager.controller;
 
+import eventmanager.dao.EventDAO;
 import eventmanager.dao.UserDAO;
+import eventmanager.model.Busca;
 import eventmanager.model.Login;
 import eventmanager.model.User;
 import javax.servlet.http.HttpSession;
@@ -39,7 +41,17 @@ public class LoginController {
         } else {
             if(user.getPassword().equals(login.getPassword())){
                 session.setAttribute("usuario_logado", user);
-                modelAndView = new ModelAndView("index");
+                modelAndView = new ModelAndView("menu");
+                // Setando Parametros da Pagina
+                modelAndView.addObject("usuario", user.getNome());
+                modelAndView.addObject("events", new EventDAO().getAllEvents());
+                modelAndView.addObject("nomeEvento", new Busca());
+                
+                // Setando interface
+                modelAndView.addObject("link1","eventos");
+                modelAndView.addObject("link1Label","Meus Eventos");
+                modelAndView.addObject("link2","inscricoes");
+                modelAndView.addObject("link2Label","Minhas Inscricoes");
             } else {
                 modelAndView = new ModelAndView("login","login",login);
                 modelAndView.addObject("message", "Senha Incorreta");     
