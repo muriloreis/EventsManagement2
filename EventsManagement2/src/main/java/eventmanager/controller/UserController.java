@@ -5,6 +5,7 @@
  */
 package eventmanager.controller;
 
+import eventmanager.dao.EventDAO;
 import eventmanager.dao.UserDAO;
 import eventmanager.model.Busca;
 import eventmanager.model.User;
@@ -89,8 +90,9 @@ public class UserController {
         User user = (User)session.getAttribute("usuario_logado");
         ModelAndView modelAndView = new ModelAndView("menu");
         //Setando Parametros da Pagina
+        
         modelAndView.addObject("usuario", user.getNome());
-        modelAndView.addObject("events", user.getMeusEventos());
+        modelAndView.addObject("events", userDAO.getUserById(user.getIduser()).getMeusEventos() );
         modelAndView.addObject("nomeEvento", new Busca());
         
         //Setando Interface
@@ -108,7 +110,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("menu");
         //Setando Parametros da Pagina
         modelAndView.addObject("usuario", user.getNome());
-        modelAndView.addObject("events", user.getMeusEventos());
+        modelAndView.addObject("events", new EventDAO().getAllEvents());
         modelAndView.addObject("nomeEvento", new Busca());
         
         //Setando Interface
@@ -125,7 +127,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("menu");
         //Setando Parametros da Pagina
         modelAndView.addObject("usuario", user.getNome());
-        modelAndView.addObject("events", user.getMeusEventos());
+        modelAndView.addObject("events", userDAO.getUserById(user.getIduser()).getMinhasInscricoes());
         modelAndView.addObject("nomeEvento", new Busca());
         
         //Setando Interface

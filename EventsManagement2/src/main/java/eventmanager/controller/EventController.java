@@ -7,6 +7,7 @@ package eventmanager.controller;
 
 import eventmanager.dao.ActivityDAO;
 import eventmanager.dao.EventDAO;
+import eventmanager.dao.UserDAO;
 import eventmanager.model.Activity;
 import eventmanager.model.Busca;
 import eventmanager.model.Event;
@@ -132,4 +133,53 @@ public class EventController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/Event/{id}")
+    public ModelAndView detail(@PathVariable int id,HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("/Event/detail");           
+        Event event = eventDAO.getEventById(id);
+        User user = (User)session.getAttribute("usuario_logado");
+        
+        //Setando Parametros da Pagina
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("nomeEvento", new Busca());
+        modelAndView.addObject("nome", event.getNome());
+        modelAndView.addObject("descricao", event.getDescricao());
+        modelAndView.addObject("activities", event.getAtividades());
+        modelAndView.addObject("id", event.getId());
+
+        
+        //Setando Interface
+        modelAndView.addObject("link1","menu");
+        modelAndView.addObject("link1Label","Menu");
+        modelAndView.addObject("link2","eventos");
+        modelAndView.addObject("link2Label","Meus Eventos");
+        modelAndView.addObject("link3","inscricoes");
+        modelAndView.addObject("link3Label","Minhas Inscricoes");
+
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/Event/inscricao/{id}")
+    public ModelAndView inscricao(@PathVariable int id,HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("menu");           
+        Event event = eventDAO.getEventById(id);
+        User user = (User)session.getAttribute("usuario_logado");
+        //new UserDAO().edit(user);
+        System.out.println(user.getIduser());
+        event.addInscritos(user);
+        eventDAO.edit(event);
+        
+        //Setando Parametros da Pagina
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("events", new EventDAO().getAllEvents());
+        modelAndView.addObject("nomeEvento", new Busca());
+        modelAndView.addObject("message", "Inscricao Realizada com Sucesso");
+        
+        //Setando Interface
+        modelAndView.addObject("link1","eventos");
+        modelAndView.addObject("link1Label","Meus Eventos");
+        modelAndView.addObject("link2","inscricoes");
+        modelAndView.addObject("link2Label","Minhas Inscricoes");
+        return modelAndView;
+    }
 }

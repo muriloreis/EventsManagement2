@@ -14,7 +14,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h3>Seja bem vindo, ${usuario} &nbsp;&nbsp; <a href="${pageContext.request.contextPath}/User/${link1}">${link1Label}</a> | <a href="${pageContext.request.contextPath}/User/${link2}">${link2Label}</a></h3>
+        <h3>Seja bem vindo, ${usuario} &nbsp;&nbsp; 
+            <a href="${pageContext.request.contextPath}/User/${link1}">${link1Label}</a>
+            | <a href="${pageContext.request.contextPath}/User/${link2}">${link2Label}</a>
+            | <a href="${pageContext.request.contextPath}/User/${link3}">${link3Label}</a>
+         </h3>
         <form:form commandName="nomeEvento" action="${pageContext.request.contextPath}/Event/busca">
             <form:input path="nome"/>
             <button type="submit">Buscar</button>

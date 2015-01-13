@@ -42,7 +42,7 @@ public class User implements Serializable {
     
     
     @OneToMany(mappedBy = "criador",targetEntity = Event.class,fetch = FetchType.EAGER)
-    private List<Event> meusEventos = new ArrayList<>();
+    private List<Event> meusEventos;
     
     @ManyToMany(mappedBy = "inscritos",targetEntity = Event.class,fetch = FetchType.EAGER)
     private List<Event> minhasInscricoes;
@@ -167,6 +167,10 @@ public class User implements Serializable {
      */
     public void setMinhasInscricoes(List<Event> minhasInscricoes) {
         this.minhasInscricoes = minhasInscricoes;
+    }
+    
+    public void addInscricao(Event event){
+        minhasInscricoes.add(event);
     }
     
 }

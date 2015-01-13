@@ -14,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -38,7 +40,10 @@ public class Event implements Serializable {
     @ManyToOne
     private User criador;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="evento_user", 
+                joinColumns={@JoinColumn(name="evento_idevento")}, 
+                inverseJoinColumns={@JoinColumn(name="inscritos_iduser")})
     private List<User> inscritos;
     
     @ManyToMany(fetch = FetchType.EAGER)
@@ -111,6 +116,10 @@ public class Event implements Serializable {
      */
     public void setInscritos(List<User> inscritos) {
         this.inscritos = inscritos;
+    }
+    
+    public void addInscritos(User user){
+        inscritos.add(user);
     }
 
     /**
