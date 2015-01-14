@@ -27,6 +27,7 @@ public class RenderView {
     public ModelAndView renderMenuViewUser(User user,ModelAndView menu){
         if(user.getType() == UserType.ADMIN){
             //Setando Interface
+            menu.addObject("link",true);
             menu.addObject("link1","eventos");
             menu.addObject("link1Label","Meus Eventos");
             menu.addObject("link2","inscricoes");
@@ -40,6 +41,7 @@ public class RenderView {
             return menu;
         } else if (user.getType() == UserType.EMPRESA){
             //Setando Interface
+            menu.addObject("link",true);
             menu.addObject("link1","eventos");
             menu.addObject("link1Label","Meus Eventos");
             menu.addObject("link2","inscricoes");
@@ -51,6 +53,7 @@ public class RenderView {
             return menu;
         } else {
             //Setando Interface
+            menu.addObject("link",true);
             menu.addObject("link1","inscricoes");
             menu.addObject("link1Label","Minhas Inscricoes");
             menu.addObject("link2","pagamentos");
@@ -62,6 +65,7 @@ public class RenderView {
     ModelAndView renderEventosViewUser(User user, ModelAndView menuEventos) {
         if(user.getType() == UserType.ADMIN){
             //Setando Interface
+            menuEventos.addObject("link",false);
             menuEventos.addObject("link1","menu");
             menuEventos.addObject("link1Label","Menu");
             menuEventos.addObject("link2","inscricoes");
@@ -75,6 +79,7 @@ public class RenderView {
             return menuEventos;
         } else if (user.getType() == UserType.EMPRESA){
             //Setando Interface
+            menuEventos.addObject("link",false);
             menuEventos.addObject("link1","menu");
             menuEventos.addObject("link1Label","Menu");
             menuEventos.addObject("link2","inscricoes");
@@ -86,6 +91,7 @@ public class RenderView {
             return menuEventos;
         } else {
             //Setando Interface
+            menuEventos.addObject("link",false);
             menuEventos.addObject("link1","inscricoes");
             menuEventos.addObject("link1Label","Minhas Inscricoes");
             menuEventos.addObject("link2","pagamentos");
@@ -97,6 +103,7 @@ public class RenderView {
     ModelAndView renderInscricoesViewUser(User user, ModelAndView menuInscricoes) {
         if(user.getType() == UserType.ADMIN){
             //Setando Interface
+            menuInscricoes.addObject("link",false);
             menuInscricoes.addObject("link1","menu");
             menuInscricoes.addObject("link1Label","Menu");
             menuInscricoes.addObject("link2","eventos");
@@ -110,6 +117,7 @@ public class RenderView {
             return menuInscricoes;
         } else if (user.getType() == UserType.EMPRESA){
             //Setando Interface
+            menuInscricoes.addObject("link",false);
             menuInscricoes.addObject("link1","menu");
             menuInscricoes.addObject("link1Label","Menu");
             menuInscricoes.addObject("link2","eventos");
@@ -121,6 +129,7 @@ public class RenderView {
             return menuInscricoes;
         } else {
             //Setando Interface
+            menuInscricoes.addObject("link",false);
             menuInscricoes.addObject("link1","menu");
             menuInscricoes.addObject("link1Label","Menu");
             menuInscricoes.addObject("link2","pagamentos");
@@ -132,6 +141,7 @@ public class RenderView {
     ModelAndView renderPagamentosViewUser(User user, ModelAndView menuPagamentos) {
         if(user.getType() == UserType.ADMIN){
             //Setando Interface
+            menuPagamentos.addObject("link",false);
             menuPagamentos.addObject("link1","menu");
             menuPagamentos.addObject("link1Label","Menu");
             menuPagamentos.addObject("link2","eventos");
@@ -145,6 +155,7 @@ public class RenderView {
             return menuPagamentos;
         } else if (user.getType() == UserType.EMPRESA){
             //Setando Interface
+            menuPagamentos.addObject("link",false);
             menuPagamentos.addObject("link1","menu");
             menuPagamentos.addObject("link1Label","Menu");
             menuPagamentos.addObject("link2","eventos");
@@ -156,6 +167,7 @@ public class RenderView {
             return menuPagamentos;
         } else {
             //Setando Interface
+            menuPagamentos.addObject("link",false);
             menuPagamentos.addObject("link1","menu");
             menuPagamentos.addObject("link1Label","Menu");
             menuPagamentos.addObject("link2","inscricoes");
@@ -167,6 +179,7 @@ public class RenderView {
     ModelAndView renderRecebimentosViewUser(User user, ModelAndView menuRecebimentos) {
         if(user.getType() == UserType.ADMIN){
             //Setando Interface
+            menuRecebimentos.addObject("link",false);
             menuRecebimentos.addObject("link1","menu");
             menuRecebimentos.addObject("link1Label","Menu");
             menuRecebimentos.addObject("link2","eventos");
@@ -180,6 +193,7 @@ public class RenderView {
             return menuRecebimentos;
         } else if (user.getType() == UserType.EMPRESA){
             //Setando Interface
+            menuRecebimentos.addObject("link",false);
             menuRecebimentos.addObject("link1","menu");
             menuRecebimentos.addObject("link1Label","Menu");
             menuRecebimentos.addObject("link2","eventos");
@@ -191,6 +205,7 @@ public class RenderView {
             return menuRecebimentos;
         } else {
             //Setando Interface
+            menuRecebimentos.addObject("link",false);
             menuRecebimentos.addObject("link1","menu");
             menuRecebimentos.addObject("link1Label","Menu");
             menuRecebimentos.addObject("link2","inscricoes");

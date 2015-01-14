@@ -37,7 +37,15 @@
             <tbody>
                 <c:forEach var="event" items="${events}">
                     <tr>
-                        <td><a href="${pageContext.request.contextPath}/Event/${event.id}">${event.nome}</a></td>
+                        <td>
+                            <c:set var="link" scope="session" value="${link}"/>
+                            <c:if test="${link == true}">
+                                <a href="${pageContext.request.contextPath}/Event/${event.id}">${event.nome}</a>
+                            </c:if>
+                            <c:if test="${link == false}">
+                                ${event.nome}
+                            </c:if>
+                        </td>
                         <td>${event.descricao}</td>
                         <td>${event.criador}</td>
                     </tr>
