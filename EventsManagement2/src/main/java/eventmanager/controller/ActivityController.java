@@ -7,7 +7,10 @@ package eventmanager.controller;
 
 import eventmanager.dao.ActivityDAO;
 import eventmanager.model.Activity;
+import eventmanager.model.Busca;
+import eventmanager.model.User;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,39 +27,55 @@ public class ActivityController {
     ActivityDAO activityDAO = new ActivityDAO();
     
     @RequestMapping(value="/Activity/addForm")
-    public ModelAndView activityForm(){
+    public ModelAndView activityForm(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/Activity/addForm","activity",new Activity());
+        User user = (User)session.getAttribute("usuario_logado");
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("nomeEvento", new Busca());
+        //-----------------------------------------------------------------
         modelAndView.addObject("action", "add");
         modelAndView.addObject("button", "Add");
-        return modelAndView;
+        return RenderView.getInstance().renderConfigEditViewUser(user, modelAndView);
     }
     
     @RequestMapping(value = "/Activity/add",method = RequestMethod.POST)
-    public ModelAndView addPost(@ModelAttribute Activity activity){
+    public ModelAndView addPost(@ModelAttribute Activity activity,HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/Activity/addForm");
+        User user = (User)session.getAttribute("usuario_logado");
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("nomeEvento", new Busca());
+        //------------------------------------------------------------------------
         activityDAO.add(activity);
         modelAndView.addObject("action", "add");
         modelAndView.addObject("button", "Add");
         modelAndView.addObject("message", "Atividade adicionada com sucesso");
-        return modelAndView;
+        return RenderView.getInstance().renderConfigEditViewUser(user, modelAndView);
     }
     
     @RequestMapping(value = "/Activity/List")
-    public ModelAndView allUsers(){
+    public ModelAndView allUsers(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/Activity/list");
+        User user = (User)session.getAttribute("usuario_logado");
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("nomeEvento", new Busca());
+        //-------------------------------------------------------
         List activities = activityDAO.getAllActivities();
         modelAndView.addObject("activities", activities);
-        return modelAndView;
+        return RenderView.getInstance().renderConfigEditViewUser(user, modelAndView);
     }
     
     @RequestMapping(value = "/Activity/editForm/{id}")
-    public ModelAndView editForm(@PathVariable int id){
+    public ModelAndView editForm(@PathVariable int id,HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/Activity/addForm");
+        User user = (User)session.getAttribute("usuario_logado");
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("nomeEvento", new Busca());
+        //------------------------------------------------------------------------
         Activity activity = activityDAO.getActivityById(id);
         modelAndView.addObject("activity", activity);
         modelAndView.addObject("button", "Save");
         modelAndView.addObject("action", "edit/"+id);
-        return modelAndView;
+        return RenderView.getInstance().renderConfigEditViewUser(user, modelAndView);
     }
     
     @RequestMapping(value = "/Activity/edit/{id}", method=RequestMethod.POST)

@@ -12,6 +12,8 @@ import eventmanager.model.Busca;
 import eventmanager.model.Event;
 import eventmanager.model.Pagamento;
 import eventmanager.model.User;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,6 +62,32 @@ public class PagamentoController {
         modelAndView.addObject("evento", new EventDAO().getEventById(id).getNome());
         modelAndView.addObject("usuario",user.getNome());
         return modelAndView;
+    }
+    
+    @RequestMapping(value = "/User/pagamentos")
+    public ModelAndView pagamentos(HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("pagamentosList");
+        User user = (User)session.getAttribute("usuario_logado");
+        List list = pagamentoDAO.getPagamentoByUser(user);
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("pagamentos", list);
+        modelAndView.addObject("nomeEvento", new Busca());
+        return RenderView.getInstance().renderPagamentosViewUser(user, modelAndView);
+    }
+    
+    @RequestMapping(value = "/User/recebimentos")
+    public ModelAndView recebimentos(HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("pagamentosList");
+        User user = (User)session.getAttribute("usuario_logado");
+        List<Event> events = user.getMeusEventos();
+        List<Pagamento> recebimentos = new ArrayList<>();
+        for (Event event : events) {
+            recebimentos.addAll(pagamentoDAO.getPagamentoByEvento(event));
+        }
+        modelAndView.addObject("pagamentos", recebimentos);
+        modelAndView.addObject("nomeEvento", new Busca());
+        modelAndView.addObject("usuario", user.getNome());
+        return RenderView.getInstance().renderPagamentosViewUser(user, modelAndView);
     }
     
 }

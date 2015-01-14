@@ -33,19 +33,26 @@ public class EventController {
     ActivityDAO activityDAO = new ActivityDAO();
     
     @RequestMapping(value="/Event/addForm")
-    public ModelAndView eventForm(){
+    public ModelAndView eventForm(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/Event/addForm","event",new Event());
+        User user = (User)session.getAttribute("usuario_logado");
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("nomeEvento", new Busca());
+        //--------------------------------------------
         modelAndView.addObject("action", "add");
         modelAndView.addObject("button", "Add");
         modelAndView.addObject("atividades", activityDAO.getAllActivities());
-        return modelAndView;
+        return RenderView.getInstance().renderConfigEditViewUser(user, modelAndView);
     }
     
     @RequestMapping(value = "/Event/add",method = RequestMethod.POST)
     public ModelAndView addPost(@ModelAttribute Event event,HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/Event/addForm");
-        String [] aux = event.getAtividade();
         User user = (User)session.getAttribute("usuario_logado");
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("nomeEvento", new Busca());
+        //---------------------------------------------------------
+        String [] aux = event.getAtividade();
         event.setCriador(user);
         List<Activity> atividades = activityDAO.getAllActivities();
         for (Activity atividade : atividades) {
@@ -60,26 +67,33 @@ public class EventController {
         modelAndView.addObject("button", "Add");
         modelAndView.addObject("atividades", atividades);
         modelAndView.addObject("message", "evento adicionado com sucesso");
-        return modelAndView;
+        return RenderView.getInstance().renderConfigEditViewUser(user, modelAndView);
     }
     
     @RequestMapping(value = "/Event/List")
-    public ModelAndView allUsers(){
+    public ModelAndView allUsers(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/Event/list");
+        User user = (User)session.getAttribute("usuario_logado");
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("nomeEvento", new Busca());
         List events = eventDAO.getAllEvents();
         modelAndView.addObject("events", events);
-        return modelAndView;
+        return RenderView.getInstance().renderConfigEditViewUser(user, modelAndView);
     }
     
     @RequestMapping(value = "/Event/editForm/{id}")
-    public ModelAndView editForm(@PathVariable int id){
+    public ModelAndView editForm(@PathVariable int id,HttpSession session){
         ModelAndView modelAndView = new ModelAndView("/Event/addForm");
+        User user = (User)session.getAttribute("usuario_logado");
+        modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("nomeEvento", new Busca());
+        //---------------------------------------------------------------
         Event event = eventDAO.getEventById(id);
         modelAndView.addObject("event", event);
         modelAndView.addObject("button", "Save");
         modelAndView.addObject("atividades", activityDAO.getAllActivities());
         modelAndView.addObject("action", "edit/"+id);
-        return modelAndView;
+        return RenderView.getInstance().renderConfigEditViewUser(user, modelAndView);
     }
     
     @RequestMapping(value = "/Event/edit/{id}", method=RequestMethod.POST)
@@ -124,13 +138,7 @@ public class EventController {
         modelAndView.addObject("events", eventDAO.getEventsByString(busca.getNome()));
         modelAndView.addObject("nomeEvento", new Busca());
         
-        //Setando Interface
-        modelAndView.addObject("message","Resultado da busca: "+busca.getNome());
-        modelAndView.addObject("link1","eventos");
-        modelAndView.addObject("link1Label","Meus Eventos");
-        modelAndView.addObject("link2","inscricoes");
-        modelAndView.addObject("link2Label","Minhas Inscricoes");
-        return modelAndView;
+        return RenderView.getInstance().renderMenuViewUser(user, modelAndView);
     }
 
     @RequestMapping(value = "/Event/{id}")
@@ -175,11 +183,6 @@ public class EventController {
         modelAndView.addObject("nomeEvento", new Busca());
         modelAndView.addObject("message", "Inscricao Realizada com Sucesso");
         
-        //Setando Interface
-        modelAndView.addObject("link1","eventos");
-        modelAndView.addObject("link1Label","Meus Eventos");
-        modelAndView.addObject("link2","inscricoes");
-        modelAndView.addObject("link2Label","Minhas Inscricoes");
-        return modelAndView;
+        return RenderView.getInstance().renderMenuViewUser(user, modelAndView);
     }
 }

@@ -47,11 +47,7 @@ public class LoginController {
                 modelAndView.addObject("events", new EventDAO().getAllEvents());
                 modelAndView.addObject("nomeEvento", new Busca());
                 
-                // Setando interface
-                modelAndView.addObject("link1","eventos");
-                modelAndView.addObject("link1Label","Meus Eventos");
-                modelAndView.addObject("link2","inscricoes");
-                modelAndView.addObject("link2Label","Minhas Inscricoes");
+                return RenderView.getInstance().renderMenuViewUser(user, modelAndView);
             } else {
                 modelAndView = new ModelAndView("login","login",login);
                 modelAndView.addObject("message", "Senha Incorreta");     

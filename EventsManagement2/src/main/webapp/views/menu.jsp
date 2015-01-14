@@ -18,6 +18,8 @@
             <a href="${pageContext.request.contextPath}/User/${link1}">${link1Label}</a>
             | <a href="${pageContext.request.contextPath}/User/${link2}">${link2Label}</a>
             | <a href="${pageContext.request.contextPath}/User/${link3}">${link3Label}</a>
+            ${(link4 != null) ? "|" : null} <a href="${pageContext.request.contextPath}/User/${link4}">${link4Label}</a>
+            ${(link5 != null) ? "|" : null} <a href="${pageContext.request.contextPath}/User/${link5}">${link5Label}</a>
          </h3>
         <form:form commandName="nomeEvento" action="${pageContext.request.contextPath}/Event/busca">
             <form:input path="nome"/>
