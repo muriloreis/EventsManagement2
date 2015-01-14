@@ -38,9 +38,9 @@
                 <form:password path="password"/> <br/>
             <label for="select-perfil">Perfil</label>    
             <form:select id="select-perfil" path="type">                
-                <form:option value="0">Admin</form:option>
-                <form:option value="1">Empresa</form:option>
-                <form:option value="2">Participante</form:option>
+                <form:option value="ADMIN">Admin</form:option>
+                <form:option value="EMPRESA">Empresa</form:option>
+                <form:option value="PARTICIPANTE">Participante</form:option>
             </form:select>
             <br/>
            <button type="submit">${button}</button>
