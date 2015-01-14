@@ -24,6 +24,7 @@ public class ConfigController {
         ModelAndView modelAndView = new ModelAndView("index");
         User user = (User)session.getAttribute("usuario_logado");
         modelAndView.addObject("usuario", user.getNome());
+        modelAndView.addObject("link", true);
         modelAndView.addObject("nomeEvento", new Busca());
         return RenderView.getInstance().renderConfigViewUser(user, modelAndView);
     }
